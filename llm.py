@@ -21,8 +21,7 @@ def get_llm(model='solar-pro3', temperature=0.05, resoning_effort='low'):
     llm = ChatUpstage(
         model=model,
         temperature=temperature,
-        reasoning_effort=resoning_effort,
-        max_tokens=100)
+        reasoning_effort=resoning_effort,)
     return llm
 
 
