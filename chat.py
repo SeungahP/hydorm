@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from PIL import Image
 from llm import get_ai_response
 
+
 st.set_page_config(page_title="한양대 생활관 챗봇", page_icon="🦁")
 
 
@@ -42,7 +43,7 @@ if user_question := st.chat_input(placeholder="생활관 입사에 관련된 궁
     st.session_state.message_list.append({"role": "user", "content": user_question})
 
     with st.spinner("답변을 생성하는 중입니다"):
-        ai_response = get_ai_response(user_question, filter)
+        ai_response = get_ai_response(user_question, filter, model='gemini-2.5-flash')
         with st.chat_message("ai"):
             ai_message = st.write_stream(ai_response)
             st.session_state.message_list.append({"role": "ai", "content": ai_message})

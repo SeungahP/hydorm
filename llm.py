@@ -144,7 +144,7 @@ def get_retriever(filter):
 #     return conversational_rag_chain
 
 
-def get_ai_response(user_message, filter={'student':'domestic'}):
+def get_ai_response(user_message, filter={'student':'domestic'}, model='solar-pro3'):
     #dictionary_chain = get_dictionary_chain()
     # rag_chain = get_rag_chain()
     # ai_response = rag_chain.stream(
@@ -157,7 +157,7 @@ def get_ai_response(user_message, filter={'student':'domestic'}):
     # )
 
     retriever = get_retriever(filter)
-    llm = get_llm()
+    llm = get_llm(model=model)
 
     prompt = PromptTemplate.from_template(
         """You are a professional assistant for 'Hanyang university's residence'-related question-answering.
