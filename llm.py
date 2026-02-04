@@ -12,16 +12,23 @@ from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.runnables.history import RunnableWithMessageHistory
 
+from langchain_google_genai import ChatGoogleGenerativeAI
 #from config import answer_examples
 
 store = {}
 
 
 def get_llm(model='solar-pro3', temperature=0.05, resoning_effort='low'):
-    llm = ChatUpstage(
-        model=model,
-        temperature=temperature,
-        reasoning_effort=resoning_effort,)
+    if model=='gemini-2.5-flash':
+        llm = ChatGoogleGenerativeAI(
+            model=model,
+            temperature=0.1,)
+    else:
+        llm = ChatUpstage(
+            model=model,
+            temperature=temperature,
+            reasoning_effort=resoning_effort,)
+        
     return llm
 
 
