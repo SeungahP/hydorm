@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder, FewS
 #from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 #from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_ollama import OllamaEmbeddings
+from langchain_huggingface.embeddings import HuggingFaceEndpointEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.prompts import PromptTemplate
@@ -25,8 +26,16 @@ def get_llm(model='solar-pro3', temperature=0.05, resoning_effort='low'):
     return llm
 
 
+# def get_retriever(filter):
+#     embedding = OllamaEmbeddings(model="bge-m3")
+#     index_name = 'hydorm-ollama-category'
+#     database = PineconeVectorStore.from_existing_index(index_name=index_name, embedding=embedding)
+#     retriever = database.as_retriever(search_kwargs={'k':3, 'filter':filter})
+#     return retriever
+
+
 def get_retriever(filter):
-    embedding = OllamaEmbeddings(model="bge-m3")
+    embedding = HuggingFaceEndpointEmbeddings(model="BAAI/bge-m3")
     index_name = 'hydorm-ollama-category'
     database = PineconeVectorStore.from_existing_index(index_name=index_name, embedding=embedding)
     retriever = database.as_retriever(search_kwargs={'k':3, 'filter':filter})
